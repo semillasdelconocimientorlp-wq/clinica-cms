@@ -1,0 +1,1 @@
+{\n  "name": "example-module",\n  "version": "1.0.0",\n  "description": "An example modular system JSON structure",\n  "main": "index.js",\n  "dependencies": {\n    "example-dependency": "^1.0.0"\n  },\n  "devDependencies": {\n    "example-dev-dependency": "^1.0.0"\n  }\n}

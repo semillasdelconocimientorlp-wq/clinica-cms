@@ -1,0 +1,23 @@
+# Apache Configuration for mod_rewrite
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Redirect www to non-www
+    RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+    RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
+    # Custom URL rewriting rules
+    RewriteRule ^about$ /about.html [L]
+    RewriteRule ^contact$ /contact.html [L]
+</IfModule>
+
+# Security Headers
+
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set X-Frame-Options "DENY"
+    Header set Content-Security-Policy "default-src 'self'"
+</IfModule>

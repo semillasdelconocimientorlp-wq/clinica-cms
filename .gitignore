@@ -1,0 +1,15 @@
+# .gitignore
+
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Build directory
+build/
+
+# Environment variables
+.env

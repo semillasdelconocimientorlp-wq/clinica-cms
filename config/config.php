@@ -1,23 +1,24 @@
 <?php
 
-// Global configuration for the application
+// Session Management
+session_start();
 
-return [
-    'db' => [
-        'driver' => 'pdo_mysql',
-        'host' => 'localhost',
-        'database' => 'clinic_db',
-        'username' => 'root',
-        'password' => '',
-    ],
-    'app' => [
-        'name' => 'Clinica CMS',
-        'version' => '1.0.0',
-    ],
-    'mail' => [
-        'smtp_host' => 'smtp.example.com',
-        'smtp_port' => 587,
-        'username' => 'user@example.com',
-        'password' => 'secret',
-    ],
-];
+// Set session timeout
+$timeout_duration = 1800; // 30 minutes
+
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();     // unset $_SESSION variables
+    session_destroy();   // destroy session data
+}
+
+$_SESSION['LAST_ACTIVITY'] = time(); // update last activity time
+
+// Utility Functions
+function redirect($url) {
+    header('Location: '.$url);
+    exit();
+}
+
+function sanitize_input($data) {
+    return htmlspecialchars(stripslashes(trim($data)));
+}
